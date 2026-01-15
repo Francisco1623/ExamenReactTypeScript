@@ -6,4 +6,4 @@ export interface Product {
 // TODO: Define la interfaz CartItem (Extiende de Product e incluye quantity)
 export interface CartItem {
   // Rellena esto
-}
+} 

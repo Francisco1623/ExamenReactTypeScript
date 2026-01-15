@@ -1,15 +1,23 @@
 // import { useCart } from "../context/CartContext";
-// import { createOrder } from "../services/productService";
+// import { createOrder } from '../services/productService';
+
+import { useCart } from "../context/CartContext";
+import { createOrder } from "../services/productService";
 
 export default function Cart() {
   // TODO: Consumir el contexto
-  const cart: any[] = []; 
-  const total = 0;
+  let {cart} = useCart(); 
+  const {total} = useCart();
   
   const handleCheckout = async () => {
     // TODO: Llamar al servicio createOrder y limpiar carrito
+
+    await createOrder(cart,total);
+    cart = [];
     alert("Implementar lógica de compra");
   };
+
+  
 
   if (cart.length === 0) return <div className="container"><h2>El carrito está vacío 😢</h2></div>;
 
@@ -28,6 +36,17 @@ export default function Cart() {
         </thead>
         <tbody>
           {/* TODO: Renderizar items del carrito */}
+            {cart.map(i=>(
+
+          <tr key={i.id}>
+            <td>{i.name}</td>
+            <td>{i.price}</td>
+            <td>{i.quantity}</td>
+            <td>{i.price*i.quantity}</td>
+
+        
+          </tr>
+))}
           <tr>
             <td colSpan={5}>No hay items todavía...</td>
           </tr>
